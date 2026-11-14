@@ -13,6 +13,7 @@ import { WindowManager } from './components/os/WindowManager';
 import { CommandPalette } from './components/modern/CommandPalette';
 import { ProjectLightbox } from './components/modern/ProjectLightbox';
 import { CanvasCraftProvider, useCanvasCraft } from './components/modern/CanvasCraftTour';
+import { SpiderHanging } from './components/modern/SpiderHanging';
 import { soundFX } from './utils/audio';
 
 // Inner Modern Layout that uses the Canvas Craft context
@@ -25,6 +26,9 @@ const ModernPortfolioView: React.FC<{
 
   return (
     <div className="min-h-screen bg-[#08090d] text-white flex flex-col selection:bg-brand-red selection:text-white relative overflow-x-hidden">
+      {/* Spider-Man Reverse Hanging Interactive Easter Egg */}
+      <SpiderHanging />
+
       {/* Background blueprint grid */}
       <div 
         className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"

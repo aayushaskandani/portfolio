@@ -14,7 +14,7 @@ export const ProofGalleryApp: React.FC = () => {
 
   const getCategoryIcon = (category: Milestone['category']) => {
     switch (category) {
-      case 'Hackathons': return <Trophy size={14} className="text-amber-600" />;
+      case 'Cloud': return <Trophy size={14} className="text-amber-600" />;
       case 'Leadership': return <Users size={14} className="text-teal-600" />;
       case 'Certifications': return <Award size={14} className="text-cyan-600" />;
       case 'Work': return <Shield size={14} className="text-emerald-600" />;
@@ -27,7 +27,7 @@ export const ProofGalleryApp: React.FC = () => {
       <div className="p-3 bg-[#000080] text-white flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Award size={16} />
-          <span className="font-pixel text-base font-bold">SPOTTED_IN_THE_WILD.EXE — REAL-WORLD PROOF</span>
+          <span className="font-pixel text-base font-bold">VERIFIED_CREDENTIALS.EXE — REAL-WORLD PROOF</span>
         </div>
         <span className="text-xs bg-white/20 px-2 py-0.5 rounded font-mono">
           {milestones.length} VERIFIED ENTRIES
@@ -36,7 +36,7 @@ export const ProofGalleryApp: React.FC = () => {
 
       {/* Filter Tabs */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
-        {['all', 'Hackathons', 'Leadership', 'Work', 'Certifications'].map(cat => (
+        {['all', 'Cloud', 'Leadership', 'Work', 'Certifications'].map(cat => (
           <button
             key={cat}
             onClick={() => {

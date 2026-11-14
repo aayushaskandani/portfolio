@@ -162,7 +162,7 @@ export const portfolioConfig = {
       ],
       outcome: [
         "200+ Student Developers actively coordinated and mentored",
-        "Multiple cloud study jams and hands-on technical hackathons conducted"
+        "Multiple cloud study jams and hands-on technical bootcamps conducted"
       ],
       metrics: "200+ Student Developers · Training Lead"
     }
@@ -318,6 +318,18 @@ export const portfolioConfig = {
 
   // Interactive Voice Assistant Q&A dossiers
   interviewQnA: [
+    {
+      id: "jarvis",
+      label: "J.A.R.V.I.S., evaluate Aayush's code",
+      query: "J.A.R.V.I.S., run full diagnostic analysis on Aayush Askandani's engineering capabilities.",
+      answer: "Online and at your service, Sir. Accessing personnel dossier for Aayush Askandani: B.Tech CSE student at Poornima University and Google Cloud Arcade Legend with 359 completed cloud labs and 55,267 points. Diagnostic analysis reveals sub-15ms Redis cache-aside pipelines in LinkForge, O(1) mathematical fractional indexing in SyncBoard, and 100% offline Himalayan navigation in TrekPedia with Claude AI. Diagnostic verdict: operates with top-tier systems velocity and fault tolerance. Highly recommended for production engineering divisions, Sir.",
+      tags: ["J.A.R.V.I.S.", "Stark AI", "Diagnostics"],
+      keyPoints: [
+        "Arc Reactor speed: sub-15ms redirect caching pipelines",
+        "359 Google Cloud labs completed across containerization and big data",
+        "Full-stack real-time collaboration with Socket.IO and React 19"
+      ]
+    },
     {
       id: "journey",
       label: "My Background & Engineering Journey",

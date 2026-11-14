@@ -68,13 +68,13 @@ export const Hero: React.FC<HeroProps> = ({ onSwitchToOS }) => {
 
             <button
               onClick={() => {
-                soundFX.playVoiceChime();
+                soundFX.playJarvisChime();
                 onSwitchToOS("interview");
               }}
-              className="px-5 py-3 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/40 text-emerald-300 font-mono text-xs sm:text-sm flex items-center gap-2 transition-all hover:-translate-y-0.5 shadow-md shadow-emerald-500/10 cursor-pointer"
+              className="px-5 py-3 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/50 text-cyan-300 font-mono text-xs sm:text-sm flex items-center gap-2 transition-all hover:-translate-y-0.5 shadow-md shadow-cyan-500/20 cursor-pointer group"
             >
-              <Mic size={15} className="text-emerald-400" />
-              <span>Live AI Interview</span>
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping group-hover:scale-125" />
+              <span>J.A.R.V.I.S. Voice AI</span>
             </button>
 
             <button

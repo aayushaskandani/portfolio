@@ -81,7 +81,7 @@ export const InterviewApp: React.FC = () => {
   // Trigger typewriter text + optional speech synthesis
   const triggerAnswer = (qna: InterviewQnA) => {
     setSelectedQnA(qna);
-    soundFX.playVoiceChime();
+    soundFX.playJarvisChime();
 
     // Cancel any ongoing speech or typewriter
     if (typeof window !== 'undefined' && window.speechSynthesis) {
@@ -172,69 +172,93 @@ export const InterviewApp: React.FC = () => {
         <div>
           {/* Top Header Badge */}
           <div className="flex items-center justify-between mb-3">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full flex items-center gap-1.5">
-              <span className={`w-1.5 h-1.5 rounded-full bg-emerald-400 ${isSpeaking ? 'animate-ping' : ''}`} />
-              LIVE 3D MOCK INTERVIEW
+            <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 px-2 py-0.5 rounded-full flex items-center gap-1.5 shadow-[0_0_10px_rgba(0,240,255,0.2)]">
+              <span className={`w-1.5 h-1.5 rounded-full bg-cyan-400 ${isSpeaking ? 'animate-ping' : ''}`} />
+              J.A.R.V.I.S. MK-85
             </span>
-            <span className="text-xs font-mono text-slate-400">AI COPILOT</span>
+            <span className="text-xs font-mono text-amber-400 font-semibold tracking-wider">STARK PROTOCOL</span>
           </div>
 
-          {/* Central Pulsing Audio Visualizer Orb */}
-          <div className="relative h-44 rounded-2xl bg-gradient-to-b from-[#181a28] to-[#0a0b12] border border-white/10 p-3 flex flex-col items-center justify-center overflow-hidden shadow-inner">
-            {/* Subtle Grid Background */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+          {/* Central Iron Man Arc Reactor Holographic HUD */}
+          <div className="relative h-48 rounded-2xl bg-gradient-to-b from-[#0b1528] to-[#060810] border border-cyan-500/30 p-3 flex flex-col items-center justify-center overflow-hidden shadow-[inset_0_0_25px_rgba(0,240,255,0.08)]">
+            {/* Subtle Arc Reactor Grid Background */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#00f0ff08_1px,transparent_1px),linear-gradient(to_bottom,#00f0ff08_1px,transparent_1px)] bg-[size:14px_14px] pointer-events-none" />
 
-            {/* Pulsing Avatar Orb */}
-            <div className="relative flex items-center justify-center">
-              {/* Outer expanding halo waves */}
+            {/* Rotating Holographic HUD Rings & Arc Reactor Core */}
+            <div className="relative flex items-center justify-center w-28 h-28">
+              {/* Outer Holographic Dashed Ring (Clockwise) */}
+              <svg
+                viewBox="0 0 100 100"
+                className="absolute inset-0 w-full h-full animate-[spin_14s_linear_infinite] pointer-events-none opacity-60"
+              >
+                <circle cx="50" cy="50" r="46" fill="none" stroke="#00f0ff" strokeWidth="1" strokeDasharray="6,4,2,4" />
+                <circle cx="50" cy="50" r="41" fill="none" stroke="#00f0ff" strokeWidth="0.75" strokeDasharray="18,12" />
+              </svg>
+
+              {/* Inner Counter-Rotating Golden HUD Ring (Counter-Clockwise) */}
+              <svg
+                viewBox="0 0 100 100"
+                className="absolute inset-2 w-[calc(100%-16px)] h-[calc(100%-16px)] animate-[spin_8s_linear_infinite_reverse] pointer-events-none opacity-50"
+              >
+                <circle cx="50" cy="50" r="38" fill="none" stroke="#ffd700" strokeWidth="1.2" strokeDasharray="10,6" />
+                <line x1="50" y1="6" x2="50" y2="14" stroke="#ffd700" strokeWidth="1.5" />
+                <line x1="50" y1="86" x2="50" y2="94" stroke="#ffd700" strokeWidth="1.5" />
+                <line x1="6" y1="50" x2="14" y2="50" stroke="#ffd700" strokeWidth="1.5" />
+                <line x1="86" y1="50" x2="94" y2="50" stroke="#ffd700" strokeWidth="1.5" />
+              </svg>
+
+              {/* Pulsing Arc Glow Waves */}
               <div
                 className={`absolute rounded-full transition-all duration-300 ${
                   isSpeaking
-                    ? 'w-32 h-32 bg-cyan-500/20 animate-ping opacity-60'
+                    ? 'w-24 h-24 bg-cyan-400/35 animate-ping'
                     : isListening
-                    ? 'w-32 h-32 bg-red-500/25 animate-pulse'
-                    : 'w-24 h-24 bg-brand-red/10'
-                }`}
-              />
-              <div
-                className={`absolute rounded-full transition-all duration-500 ${
-                  isSpeaking
-                    ? 'w-24 h-24 bg-cyan-400/30 blur-md animate-pulse'
-                    : 'w-20 h-20 bg-brand-red/20 blur-sm'
+                    ? 'w-24 h-24 bg-red-500/30 animate-pulse'
+                    : 'w-20 h-20 bg-cyan-500/15'
                 }`}
               />
 
-              {/* Core Visualizer Orb */}
+              {/* Central Arc Reactor Core */}
               <div
-                className={`relative w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 border-2 ${
+                className={`relative w-16 h-16 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(0,240,255,0.7)] transition-all duration-300 border-2 ${
                   isSpeaking
-                    ? 'bg-gradient-to-tr from-cyan-600 via-sky-400 to-emerald-400 border-cyan-300 scale-110 shadow-cyan-500/50'
+                    ? 'bg-gradient-to-tr from-cyan-900 via-sky-600 to-cyan-300 border-cyan-200 scale-110'
                     : isListening
-                    ? 'bg-gradient-to-tr from-red-600 to-amber-500 border-red-300 scale-105 shadow-red-500/50'
-                    : 'bg-gradient-to-tr from-brand-red to-orange-500 border-white/30'
+                    ? 'bg-gradient-to-tr from-red-900 to-amber-500 border-amber-300 scale-105'
+                    : 'bg-gradient-to-tr from-slate-900 via-cyan-950 to-blue-900 border-cyan-400/60'
                 }`}
               >
-                {isListening ? (
-                  <Mic size={24} className="text-white animate-bounce" />
-                ) : isSpeaking ? (
-                  <Radio size={24} className="text-white animate-spin" />
-                ) : (
-                  <Sparkles size={24} className="text-white drop-shadow" />
-                )}
+                {/* Arc Reactor Triangular Core SVG */}
+                <svg width="28" height="28" viewBox="0 0 40 40" className="animate-pulse">
+                  <polygon
+                    points="20,6 34,30 6,30"
+                    fill="none"
+                    stroke={isListening ? "#ff4444" : "#00f0ff"}
+                    strokeWidth="2.5"
+                    style={{ filter: "drop-shadow(0 0 6px #00f0ff)" }}
+                  />
+                  <circle
+                    cx="20"
+                    cy="22"
+                    r="5"
+                    fill={isListening ? "#ff4444" : "#00f0ff"}
+                    className="animate-ping"
+                  />
+                </svg>
               </div>
             </div>
 
             {/* Dynamic Waveform Visualizer Bars */}
-            <div className="flex items-center gap-1.5 mt-4 h-6">
+            <div className="flex items-center gap-1.5 mt-3 h-5">
               {[40, 75, 100, 60, 90, 50, 85, 30].map((h, i) => (
                 <span
                   key={i}
                   className={`w-1 rounded-full transition-all duration-150 ${
                     isSpeaking
-                      ? 'bg-cyan-400 animate-pulse'
+                      ? 'bg-cyan-300 shadow-[0_0_8px_#00f0ff] animate-pulse'
                       : isListening
-                      ? 'bg-brand-red animate-bounce'
-                      : 'bg-white/20'
+                      ? 'bg-amber-400 animate-bounce'
+                      : 'bg-cyan-500/20'
                   }`}
                   style={{
                     height: isSpeaking ? `${Math.max(6, Math.floor(h * Math.random()))}px` : isListening ? `${h * 0.4}px` : '4px',
@@ -245,12 +269,13 @@ export const InterviewApp: React.FC = () => {
             </div>
 
             {/* Status text */}
-            <div className="text-[11px] font-mono text-slate-300 mt-2 font-medium tracking-wide">
+            <div className="text-[10px] font-mono text-cyan-300 mt-2 font-medium tracking-wide flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
               {isListening
-                ? 'Listening to your voice...'
+                ? 'AUDIO INGESTION IN PROGRESS...'
                 : isSpeaking
-                ? 'Synthesizing voice response...'
-                : 'Ready for interrogation'}
+                ? 'J.A.R.V.I.S. SYNTHESIZING VOICE...'
+                : 'ARC REACTOR 100% // ALL SYSTEMS NOMINAL'}
             </div>
           </div>
 

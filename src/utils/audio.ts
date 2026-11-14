@@ -95,6 +95,35 @@ class SoundFX {
     setTimeout(() => this.playFrequency(880, 0.1, 'sine', 0.04), 70);
   }
 
+  // Stark J.A.R.V.I.S. HUD power-up chime
+  playJarvisChime() {
+    this.playFrequency(523.25, 0.06, 'sine', 0.05); // C5
+    setTimeout(() => this.playFrequency(783.99, 0.08, 'sine', 0.05), 50); // G5
+    setTimeout(() => this.playFrequency(1046.50, 0.12, 'triangle', 0.04), 110); // C6
+  }
+
+  // Spider-Man Web "THWIP!" sound synthesizer
+  playWebThwip() {
+    if (!this.enabled) return;
+    try {
+      const ctx = this.getContext();
+      if (!ctx) return;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(2400, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.07);
+
+      gain.gain.setValueAtTime(0.06, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.07);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.07);
+    } catch {}
+  }
+
   // --- Real-time Ambient Lo-Fi Background Synthesizer ---
   // Plays warm, dreamy ambient chords (Dm7 -> G7 -> Cmaj7 -> Am7)
   public toggleAmbientMusic(): boolean {

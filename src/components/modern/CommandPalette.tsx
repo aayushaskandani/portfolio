@@ -108,8 +108,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     {
       id: 'app-proof',
       category: 'Apps',
-      title: 'Spotted in the Wild (Real Proof & Awards)',
-      subtitle: 'Hackathon finalist cheques, speaking stages & credentials',
+      title: 'Real Proof & Credentials',
+      subtitle: 'Google Cloud Arcade Legend, GDG leadership & certifications',
       icon: <Award size={15} className="text-yellow-400" />,
       action: () => onOpenOSApp('proof')
     },

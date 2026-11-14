@@ -15,7 +15,7 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ onOpenProofGalle
 
   const getCategoryIcon = (category: Milestone['category']) => {
     switch (category) {
-      case 'Hackathons': return <Trophy size={14} className="text-amber-400" />;
+      case 'Cloud': return <Trophy size={14} className="text-amber-400" />;
       case 'Leadership': return <Users size={14} className="text-teal-400" />;
       case 'Certifications': return <Award size={14} className="text-cyan-400" />;
       case 'Work': return <Shield size={14} className="text-emerald-400" />;
@@ -36,7 +36,7 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ onOpenProofGalle
           KEEP BUILDING. <span className="text-brand-red">KEEP SHIPPING.</span>
         </h2>
         <p className="text-slate-400 text-xs sm:text-sm mt-2 max-w-xl font-light">
-          Real-world milestones: hackathon war rooms, keynote stages, community leadership, and production software deliveries.
+          Real-world milestones: cloud architecture labs, technical workshops, GDG community leadership, and production software deliveries.
         </p>
       </div>
 
@@ -95,21 +95,21 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ onOpenProofGalle
             </div>
 
             <p className="text-xs text-slate-400 mt-4 leading-relaxed font-light">
-              From competitive hackathon arenas with 72-hour deadlines to auditorium keynotes with 200+ developers, I believe engineering proves itself only when systems run in the real world.
+              From engineering high-throughput microservices to conducting Google Cloud workshops for 200+ students, I believe engineering proves itself only when systems run in the real world.
             </p>
 
             <div className="mt-6 pt-5 border-t border-white/10 space-y-3 font-mono text-xs">
               <div className="flex items-center justify-between text-slate-300">
-                <span>Hackathon Finalist</span>
-                <span className="text-emerald-400 font-semibold">Top 5</span>
+                <span>Google Cloud Arcade</span>
+                <span className="text-emerald-400 font-semibold">Legend (55k+ Pts)</span>
               </div>
               <div className="flex items-center justify-between text-slate-300">
-                <span>Community Growth</span>
-                <span className="text-cyan-400 font-semibold">+1,200 Members</span>
+                <span>GDG Community</span>
+                <span className="text-cyan-400 font-semibold">200+ Students</span>
               </div>
               <div className="flex items-center justify-between text-slate-300">
-                <span>Code Uptime</span>
-                <span className="text-teal-400 font-semibold">99.9%</span>
+                <span>Skill Badges Earned</span>
+                <span className="text-teal-400 font-semibold">121 Badges</span>
               </div>
             </div>
           </div>

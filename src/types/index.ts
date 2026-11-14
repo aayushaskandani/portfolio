@@ -24,7 +24,7 @@ export interface Milestone {
   id: string;
   organization: string;
   roleOrAchievement: string;
-  category: 'Hackathons' | 'Leadership' | 'Work' | 'Certifications';
+  category: 'Cloud' | 'Leadership' | 'Work' | 'Certifications';
   date: string;
   badge: string;
   description: string;
