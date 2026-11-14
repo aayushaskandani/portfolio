@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { portfolioConfig } from '../../data/portfolioData';
 import { Project } from '../../types';
 import { soundFX } from '../../utils/audio';
+import { useCanvasCraft } from './CanvasCraftTour';
 import { ExternalLink, Github, BookOpen, Layers, Sparkles, Cpu } from 'lucide-react';
 
 interface WorkSectionProps {
@@ -12,6 +13,7 @@ interface WorkSectionProps {
 export const WorkSection: React.FC<WorkSectionProps> = ({ onOpenDossier, onOpenLightbox }) => {
   const [activeFilter, setActiveFilter] = useState<'all' | 'systems' | 'ai' | 'web'>('all');
   const { projects } = portfolioConfig;
+  const { registerRef } = useCanvasCraft();
 
   const filteredProjects = activeFilter === 'all'
     ? projects
@@ -27,7 +29,7 @@ export const WorkSection: React.FC<WorkSectionProps> = ({ onOpenDossier, onOpenL
   return (
     <section id="work" className="py-24 px-5 sm:px-8 max-w-7xl mx-auto border-t border-white/[0.08]">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+      <div ref={(el) => registerRef('workHeader', el)} className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         <div>
           <div className="text-xs font-mono text-brand-red tracking-widest uppercase mb-1 flex items-center gap-2">
             <Cpu size={14} />
@@ -65,9 +67,10 @@ export const WorkSection: React.FC<WorkSectionProps> = ({ onOpenDossier, onOpenL
 
       {/* Projects Grid with Interactive 3D Glow Tilt Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {filteredProjects.map((project) => (
+        {filteredProjects.map((project, idx) => (
           <div
             key={project.id}
+            ref={(el) => registerRef(`workCard${idx}`, el)}
             onMouseMove={(e) => {
               const card = e.currentTarget;
               const rect = card.getBoundingClientRect();

@@ -6,15 +6,13 @@ import { Monitor, Volume2, VolumeX, Music, Users, Search, Sparkles } from 'lucid
 interface NavbarProps {
   onSwitchToOS: () => void;
   onOpenCommandPalette: () => void;
-  ghostsEnabled: boolean;
-  onToggleGhosts: () => void;
+  onRebuildCanvas: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onSwitchToOS,
   onOpenCommandPalette,
-  ghostsEnabled,
-  onToggleGhosts
+  onRebuildCanvas
 }) => {
   const [soundEnabled, setSoundEnabled] = useState(soundFX.enabled);
   const [musicPlaying, setMusicPlaying] = useState(soundFX.isMusicPlaying);
@@ -98,21 +96,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             </kbd>
           </button>
 
-          {/* Ghost Cursors Simulation Toggle */}
+          {/* Rebuild Canvas Tour Button */}
           <button
             onClick={() => {
-              soundFX.playClick();
-              onToggleGhosts();
+              soundFX.playWarp();
+              onRebuildCanvas();
             }}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border transition-all text-xs font-mono cursor-pointer ${
-              ghostsEnabled
-                ? 'bg-purple-500/15 border-purple-400/40 text-purple-300 shadow-sm'
-                : 'bg-white/[0.03] border-white/10 text-slate-400 hover:text-white'
-            }`}
-            title="Toggle Live Multi-Cursor Simulation"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#ff3b3b] to-[#dc2626] hover:from-[#ff5252] hover:to-[#ef4444] text-white text-xs font-semibold shadow-lg shadow-red-500/25 transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0"
+            title="Watch mouse pointers span selector boxes to craft the site"
           >
-            <Users size={13} className={ghostsEnabled ? 'text-purple-400' : ''} />
-            <span className="hidden md:inline">5 Live</span>
+            <Sparkles size={13} className="animate-spin" style={{ animationDuration: "3s" }} />
+            <span className="hidden sm:inline">✨ Rebuild Canvas</span>
+            <span className="sm:hidden">Canvas</span>
           </button>
 
           {/* Lo-Fi Ambient Synthesizer & Equalizer */}

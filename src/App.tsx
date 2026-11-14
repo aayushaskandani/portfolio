@@ -10,16 +10,64 @@ import { JourneySection } from './components/modern/JourneySection';
 import { ContactSection } from './components/modern/ContactSection';
 import { Footer } from './components/modern/Footer';
 import { WindowManager } from './components/os/WindowManager';
-import { GhostCursors } from './components/modern/GhostCursors';
 import { CommandPalette } from './components/modern/CommandPalette';
 import { ProjectLightbox } from './components/modern/ProjectLightbox';
+import { CanvasCraftProvider, useCanvasCraft } from './components/modern/CanvasCraftTour';
 import { soundFX } from './utils/audio';
+
+// Inner Modern Layout that uses the Canvas Craft context
+const ModernPortfolioView: React.FC<{
+  onSwitchToOS: (openAppId?: string) => void;
+  onOpenCommandPalette: () => void;
+  onOpenLightbox: (project: Project) => void;
+}> = ({ onSwitchToOS, onOpenCommandPalette, onOpenLightbox }) => {
+  const { rebuildCanvas } = useCanvasCraft();
+
+  return (
+    <div className="min-h-screen bg-[#08090d] text-white flex flex-col selection:bg-brand-red selection:text-white relative overflow-x-hidden">
+      {/* Background blueprint grid */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
+        style={{
+          backgroundImage: "linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)",
+          backgroundSize: "48px 48px"
+        }}
+      />
+      {/* Ambient Radial Lighting */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-[#e11d48]/10 via-[#b91c1c]/5 to-transparent blur-[140px] pointer-events-none z-0" />
+      <div className="fixed top-[1200px] right-0 w-[600px] h-[600px] bg-gradient-to-l from-[#3b82f6]/10 to-transparent blur-[150px] pointer-events-none z-0" />
+
+      {/* Modern Navigation */}
+      <Navbar
+        onSwitchToOS={() => onSwitchToOS()}
+        onOpenCommandPalette={onOpenCommandPalette}
+        onRebuildCanvas={() => rebuildCanvas(1)}
+      />
+
+      {/* Main Sections */}
+      <main className="flex-1 relative z-10">
+        <Hero onSwitchToOS={onSwitchToOS} />
+        <WorkSection
+          onOpenDossier={() => onSwitchToOS('builder')}
+          onOpenLightbox={onOpenLightbox}
+        />
+        <WireframeSlider />
+        <CraftSection />
+        <StorySection onOpenStoryApp={() => onSwitchToOS('story')} />
+        <JourneySection onOpenProofGallery={() => onSwitchToOS('proof')} />
+        <ContactSection />
+      </main>
+
+      {/* Modern Footer */}
+      <Footer onSwitchToOS={() => onSwitchToOS()} />
+    </div>
+  );
+};
 
 export const App: React.FC = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('modern');
   const [initialApp, setInitialApp] = useState<string | undefined>(undefined);
   const [osTheme, setOSTheme] = useState<OSTheme>('win98');
-  const [ghostsEnabled, setGhostsEnabled] = useState<boolean>(true);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState<boolean>(false);
   const [selectedLightboxProject, setSelectedLightboxProject] = useState<Project | null>(null);
 
@@ -60,42 +108,20 @@ export const App: React.FC = () => {
           onOpenOSApp={(appId) => switchToOS(appId)}
           onSwitchOSTheme={(th) => setOSTheme(th)}
           onToggleMusic={() => soundFX.toggleAmbientMusic()}
-          onToggleGhosts={() => setGhostsEnabled(prev => !prev)}
-          ghostsEnabled={ghostsEnabled}
+          onToggleGhosts={() => {}}
+          ghostsEnabled={false}
         />
       </>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#08090d] text-white flex flex-col selection:bg-brand-red selection:text-white relative">
-      {/* Ghost Multi-Cursor Simulation */}
-      <GhostCursors enabled={ghostsEnabled} />
-
-      {/* Modern Navigation */}
-      <Navbar
-        onSwitchToOS={() => switchToOS()}
+    <CanvasCraftProvider>
+      <ModernPortfolioView
+        onSwitchToOS={switchToOS}
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
-        ghostsEnabled={ghostsEnabled}
-        onToggleGhosts={() => setGhostsEnabled(prev => !prev)}
+        onOpenLightbox={(project) => setSelectedLightboxProject(project)}
       />
-
-      {/* Main Sections */}
-      <main className="flex-1">
-        <Hero onSwitchToOS={switchToOS} />
-        <WorkSection
-          onOpenDossier={(projectId) => switchToOS('builder')}
-          onOpenLightbox={(project) => setSelectedLightboxProject(project)}
-        />
-        <WireframeSlider />
-        <CraftSection />
-        <StorySection onOpenStoryApp={() => switchToOS('story')} />
-        <JourneySection onOpenProofGallery={() => switchToOS('proof')} />
-        <ContactSection />
-      </main>
-
-      {/* Modern Footer */}
-      <Footer onSwitchToOS={() => switchToOS()} />
 
       {/* Architecture Lightbox Modal */}
       <ProjectLightbox
@@ -113,10 +139,10 @@ export const App: React.FC = () => {
           switchToOS();
         }}
         onToggleMusic={() => soundFX.toggleAmbientMusic()}
-        onToggleGhosts={() => setGhostsEnabled(prev => !prev)}
-        ghostsEnabled={ghostsEnabled}
+        onToggleGhosts={() => {}}
+        ghostsEnabled={false}
       />
-    </div>
+    </CanvasCraftProvider>
   );
 };
 

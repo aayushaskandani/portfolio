@@ -1,6 +1,7 @@
 import React from 'react';
 import { portfolioConfig } from '../../data/portfolioData';
 import { soundFX } from '../../utils/audio';
+import { useCanvasCraft } from './CanvasCraftTour';
 import { ArrowDownRight, Terminal, Layers, Mic, ExternalLink } from 'lucide-react';
 
 interface HeroProps {
@@ -9,6 +10,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onSwitchToOS }) => {
   const { personal } = portfolioConfig;
+  const { registerRef } = useCanvasCraft();
 
   return (
     <section id="hero" className="relative pt-32 sm:pt-40 pb-20 sm:pb-32 px-5 sm:px-8 max-w-7xl mx-auto flex flex-col justify-center min-h-[90vh] overflow-hidden select-none font-sans">
@@ -26,7 +28,7 @@ export const Hero: React.FC<HeroProps> = ({ onSwitchToOS }) => {
         {/* Left Column: Headline and Bio */}
         <div className="lg:col-span-7 flex flex-col items-start space-y-5">
           {/* Handwritten greeting */}
-          <div className="flex items-center gap-3">
+          <div ref={(el) => registerRef('heroTitle', el)} className="flex items-center gap-3">
             <span className="font-caveat text-2xl sm:text-3xl text-amber-300 rotate-[-3deg] inline-block">
               {personal.greeting}
             </span>
@@ -38,13 +40,13 @@ export const Hero: React.FC<HeroProps> = ({ onSwitchToOS }) => {
           </div>
 
           {/* Name Headline */}
-          <h1 className="font-anton text-5xl sm:text-7xl md:text-8xl tracking-tight leading-[0.92] text-white">
+          <h1 ref={(el) => registerRef('heroName', el)} className="font-anton text-5xl sm:text-7xl md:text-8xl tracking-tight leading-[0.92] text-white">
             {personal.name.toUpperCase()}
             <span className="text-brand-red inline-block ml-2 sm:ml-3 animate-pulse">.</span>
           </h1>
 
           {/* Title and Bio */}
-          <div className="space-y-3 max-w-xl">
+          <div ref={(el) => registerRef('heroBio', el)} className="space-y-3 max-w-xl">
             <h2 className="text-lg sm:text-xl font-medium text-slate-200">
               {personal.title}
             </h2>
@@ -123,7 +125,7 @@ export const Hero: React.FC<HeroProps> = ({ onSwitchToOS }) => {
         </div>
 
         {/* Right Column: Key Metrics Bento Box */}
-        <div className="lg:col-span-5 grid grid-cols-2 gap-3.5 sm:gap-4">
+        <div ref={(el) => registerRef('heroStats', el)} className="lg:col-span-5 grid grid-cols-2 gap-3.5 sm:gap-4">
           <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-all group">
             <div className="font-anton text-4xl sm:text-5xl text-brand-red group-hover:scale-105 transition-transform">
               359+

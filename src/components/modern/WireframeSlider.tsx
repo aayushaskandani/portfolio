@@ -1,11 +1,13 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { soundFX } from '../../utils/audio';
+import { useCanvasCraft } from './CanvasCraftTour';
 import { Terminal, Cpu, Database, Activity, GitBranch } from 'lucide-react';
 
 export const WireframeSlider: React.FC = () => {
   const [sliderPosition, setSliderPosition] = useState(50); // percentage 0 - 100
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
+  const { registerRef } = useCanvasCraft();
 
   const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current) return;
@@ -26,7 +28,11 @@ export const WireframeSlider: React.FC = () => {
   };
 
   return (
-    <section id="wireframe" className="py-24 px-5 sm:px-8 max-w-7xl mx-auto border-t border-white/[0.08]">
+    <section
+      ref={(el) => registerRef('wireframeSection', el)}
+      id="wireframe"
+      className="py-24 px-5 sm:px-8 max-w-7xl mx-auto border-t border-white/[0.08]"
+    >
       <div className="mb-10">
         <div className="text-xs font-mono text-brand-red tracking-widest uppercase mb-1">
           02 / PROCESS REVEALED

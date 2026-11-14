@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { portfolioConfig } from '../../data/portfolioData';
 import { soundFX } from '../../utils/audio';
+import { useCanvasCraft } from './CanvasCraftTour';
 import { Mail, Copy, Check, Github, Linkedin, Phone, Code2, ArrowUpRight, FileText } from 'lucide-react';
 
 export const ContactSection: React.FC = () => {
   const { personal } = portfolioConfig;
   const [copied, setCopied] = useState(false);
+  const { registerRef } = useCanvasCraft();
 
   const copyEmail = () => {
     soundFX.playClick();
@@ -15,7 +17,11 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 px-5 sm:px-8 max-w-7xl mx-auto border-t border-white/[0.08]">
+    <section
+      ref={(el) => registerRef('contactSection', el)}
+      id="contact"
+      className="py-24 px-5 sm:px-8 max-w-7xl mx-auto border-t border-white/[0.08]"
+    >
       <div className="max-w-3xl">
         <div className="text-xs font-mono text-brand-red tracking-widest uppercase mb-1">
           05 / YOUR NEXT PROJECT

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { portfolioConfig } from '../../data/portfolioData';
 import { soundFX } from '../../utils/audio';
 import { Chapter } from '../../types';
+import { useCanvasCraft } from './CanvasCraftTour';
 import { BookOpen, ChevronRight, ChevronLeft, Quote, Sparkles, Terminal } from 'lucide-react';
 
 interface StorySectionProps {
@@ -12,6 +13,7 @@ export const StorySection: React.FC<StorySectionProps> = ({ onOpenStoryApp }) =>
   const { chapters } = portfolioConfig;
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const chapter: Chapter = chapters[activeIdx] || chapters[0];
+  const { registerRef } = useCanvasCraft();
 
   const selectChapter = (idx: number) => {
     soundFX.playFrequency(580 + idx * 35, 0.05);
@@ -19,7 +21,11 @@ export const StorySection: React.FC<StorySectionProps> = ({ onOpenStoryApp }) =>
   };
 
   return (
-    <section id="story" className="py-24 px-5 sm:px-8 max-w-7xl mx-auto border-t border-white/[0.08]">
+    <section
+      ref={(el) => registerRef('storySection', el)}
+      id="story"
+      className="py-24 px-5 sm:px-8 max-w-7xl mx-auto border-t border-white/[0.08]"
+    >
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         <div>

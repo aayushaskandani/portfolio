@@ -2,6 +2,7 @@ import React from 'react';
 import { portfolioConfig } from '../../data/portfolioData';
 import { soundFX } from '../../utils/audio';
 import { Milestone } from '../../types';
+import { useCanvasCraft } from './CanvasCraftTour';
 import { Trophy, Users, Shield, Award, CheckCircle } from 'lucide-react';
 
 interface JourneySectionProps {
@@ -10,6 +11,7 @@ interface JourneySectionProps {
 
 export const JourneySection: React.FC<JourneySectionProps> = ({ onOpenProofGallery }) => {
   const { milestones } = portfolioConfig;
+  const { registerRef } = useCanvasCraft();
 
   const getCategoryIcon = (category: Milestone['category']) => {
     switch (category) {
@@ -21,7 +23,11 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ onOpenProofGalle
   };
 
   return (
-    <section id="journey" className="py-24 px-5 sm:px-8 max-w-7xl mx-auto border-t border-white/[0.08]">
+    <section
+      ref={(el) => registerRef('journeySection', el)}
+      id="journey"
+      className="py-24 px-5 sm:px-8 max-w-7xl mx-auto border-t border-white/[0.08]"
+    >
       <div className="mb-12">
         <div className="text-xs font-mono text-brand-red tracking-widest uppercase mb-1">
           04 / THE JOURNEY
@@ -81,7 +87,7 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ onOpenProofGalle
         </div>
 
         {/* Right Column: "SHIPPED. LIVE. USED." Bento Card */}
-        <div className="lg:col-span-4 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#181a24] to-[#0c0d14] border border-white/10 flex flex-col justify-between space-y-6 shadow-2xl">
+        <div ref={(el) => registerRef('journeyPhoto', el)} className="lg:col-span-4 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#181a24] to-[#0c0d14] border border-white/10 flex flex-col justify-between space-y-6 shadow-2xl">
           <div>
             <div className="font-anton text-3xl sm:text-4xl text-brand-red tracking-wide leading-none">
               SHIPPED.<br />
