@@ -15,7 +15,7 @@ export const portfolioConfig = {
     linkedin: "https://linkedin.com/in/aayush-askandani",
     leetcode: "https://leetcode.com/u/AayushAskandani",
     twitter: "https://twitter.com",
-    resumeUrl: "#",
+    resumeUrl: "/Aayush_Askandani_Resume.pdf",
     statusBadge: "OPEN FOR SDE INTERNSHIPS & FULL-STACK ROLES",
   },
 
