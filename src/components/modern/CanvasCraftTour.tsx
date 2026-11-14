@@ -375,33 +375,34 @@ export const CanvasCraftProvider: React.FC<{ children: React.ReactNode }> = ({ c
             </div>
           ))}
 
-          {/* Active Crafting Selector Box */}
+          {/* Active Crafting Selector Box - Exact Match to developeryug.vercel.app */}
           {selectorBox && (
             <>
-              {/* Figma-like bounding box */}
+              {/* Solid Orange Bounding Box */}
               <div
-                className="absolute border-2 border-dashed pointer-events-none transition-none shadow-[0_0_20px_rgba(0,149,246,0.3)]"
+                className="absolute border-2 pointer-events-none transition-none shadow-[0_0_25px_rgba(249,115,22,0.4)]"
                 style={{
                   left: `${selectorBox.x}px`,
                   top: `${selectorBox.y}px`,
                   width: `${selectorBox.width}px`,
                   height: `${selectorBox.height}px`,
-                  borderColor: selectorBox.color,
-                  backgroundColor: `${selectorBox.color}15`
+                  borderColor: '#f97316',
+                  backgroundColor: 'rgba(249, 115, 22, 0.12)'
                 }}
               >
-                {/* 4 Corner Square Handles */}
-                <span className="absolute -top-1 -left-1 w-2.5 h-2.5 bg-white border pointer-events-none" style={{ borderColor: selectorBox.color }} />
-                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-white border pointer-events-none" style={{ borderColor: selectorBox.color }} />
-                <span className="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-white border pointer-events-none" style={{ borderColor: selectorBox.color }} />
-                <span className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-white border pointer-events-none" style={{ borderColor: selectorBox.color }} />
+                {/* 4 Corner Square Handles (White with Orange Border) */}
+                <span className="absolute -top-1.5 -left-1.5 w-2.5 h-2.5 bg-white border border-[#f97316] pointer-events-none shadow" />
+                <span className="absolute -top-1.5 -right-1.5 w-2.5 h-2.5 bg-white border border-[#f97316] pointer-events-none shadow" />
+                <span className="absolute -bottom-1.5 -left-1.5 w-2.5 h-2.5 bg-white border border-[#f97316] pointer-events-none shadow" />
+                <span className="absolute -bottom-1.5 -right-1.5 w-2.5 h-2.5 bg-white border border-[#f97316] pointer-events-none shadow" />
 
-                {/* Dimension Badge: 45 x 16 */}
+                {/* Dimension Badge: 46 • 16 Centered Above */}
                 <div
-                  className="absolute -top-6 left-0 px-1.5 py-0.5 text-[9px] font-mono text-black font-bold rounded-sm pointer-events-none shadow"
-                  style={{ backgroundColor: selectorBox.color }}
+                  className="absolute -top-7 left-1/2 -translate-x-1/2 px-2 py-0.5 text-[10px] font-mono text-black font-extrabold rounded bg-[#f97316] shadow-md pointer-events-none whitespace-nowrap flex items-center gap-1"
                 >
-                  {Math.round(selectorBox.width)} × {Math.round(selectorBox.height)}
+                  <span>{Math.round(selectorBox.width)}</span>
+                  <span>•</span>
+                  <span>{Math.round(selectorBox.height)}</span>
                 </div>
               </div>
 
@@ -414,7 +415,7 @@ export const CanvasCraftProvider: React.FC<{ children: React.ReactNode }> = ({ c
                 }}
               >
                 <ArrowPointer
-                  color={selectorBox.color}
+                  color="#f97316"
                   rotation={selectorBox.rotation}
                   isClicking={true}
                   size={22}

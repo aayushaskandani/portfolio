@@ -3,7 +3,8 @@ import { portfolioConfig } from '../../data/portfolioData';
 import { Project } from '../../types';
 import { soundFX } from '../../utils/audio';
 import { useCanvasCraft } from './CanvasCraftTour';
-import { ExternalLink, Github, BookOpen, Layers, Sparkles, Cpu } from 'lucide-react';
+import { useStarkHud } from './StarkJarvisHUD';
+import { ExternalLink, Github, BookOpen, Layers, Sparkles, Cpu, Crosshair } from 'lucide-react';
 
 interface WorkSectionProps {
   onOpenDossier: (projectId: string) => void;
@@ -14,6 +15,7 @@ export const WorkSection: React.FC<WorkSectionProps> = ({ onOpenDossier, onOpenL
   const [activeFilter, setActiveFilter] = useState<'all' | 'systems' | 'ai' | 'web'>('all');
   const { projects } = portfolioConfig;
   const { registerRef } = useCanvasCraft();
+  const { isStarkHudActive } = useStarkHud();
 
   const filteredProjects = activeFilter === 'all'
     ? projects
@@ -85,9 +87,29 @@ export const WorkSection: React.FC<WorkSectionProps> = ({ onOpenDossier, onOpenL
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
             }}
-            className="group relative rounded-2xl bg-gradient-to-b from-[#141624] to-[#0c0d16] border border-white/[0.08] hover:border-brand-red/50 transition-all duration-200 flex flex-col justify-between overflow-hidden p-6 sm:p-7 shadow-lg hover:shadow-2xl hover:shadow-brand-red/10 will-change-transform"
+            className="group relative rounded-2xl bg-gradient-to-b from-[#141624] to-[#0c0d16] border border-white/[0.08] hover:border-cyan-400/50 transition-all duration-200 flex flex-col justify-between overflow-hidden p-6 sm:p-7 shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10 will-change-transform"
             style={{ transformStyle: 'preserve-3d' }}
           >
+            {/* Stark Nanotech Corner Brackets & Web Filigree */}
+            <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none" />
+
+            {/* Geometric Nanotech Spider Web Corner Lattice (SVG) */}
+            <svg className="absolute top-0 right-0 w-20 h-20 pointer-events-none opacity-20 group-hover:opacity-40 transition-opacity overflow-hidden" viewBox="0 0 80 80">
+              <path d="M80 0 L0 80 M80 20 L20 80 M80 40 L40 80 M80 60 L60 80" stroke="#00f0ff" strokeWidth="0.8" />
+              <path d="M50 0 C65 15 65 15 80 30 M30 0 C55 25 55 25 80 50" stroke="#e11d48" strokeWidth="0.8" />
+            </svg>
+
+            {/* Stark Tactical HUD Target Lock Overlay (When HUD is active) */}
+            {isStarkHudActive && (
+              <div className="absolute -top-1 left-4 px-2 py-0.5 rounded bg-cyan-950/90 border border-cyan-400 text-[9px] font-mono text-cyan-300 font-bold tracking-widest flex items-center gap-1 shadow-[0_0_10px_#00f0ff] z-20 pointer-events-none animate-pulse">
+                <Crosshair size={10} />
+                <span>TARGET: 0x{project.id.toUpperCase()} // NOMINAL</span>
+              </div>
+            )}
+
             {/* Top Tag & Metric */}
             <div>
               <div className="flex items-center justify-between gap-2 mb-3">

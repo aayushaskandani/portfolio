@@ -13,7 +13,8 @@ import { WindowManager } from './components/os/WindowManager';
 import { CommandPalette } from './components/modern/CommandPalette';
 import { ProjectLightbox } from './components/modern/ProjectLightbox';
 import { CanvasCraftProvider, useCanvasCraft } from './components/modern/CanvasCraftTour';
-import { SpiderHanging } from './components/modern/SpiderHanging';
+import { StarkHudProvider } from './components/modern/StarkJarvisHUD';
+import { SpiderWebCanvas } from './components/modern/SpiderWebCanvas';
 import { soundFX } from './utils/audio';
 
 // Inner Modern Layout that uses the Canvas Craft context
@@ -26,8 +27,8 @@ const ModernPortfolioView: React.FC<{
 
   return (
     <div className="min-h-screen bg-[#08090d] text-white flex flex-col selection:bg-brand-red selection:text-white relative overflow-x-hidden">
-      {/* Spider-Man Reverse Hanging Interactive Easter Egg */}
-      <SpiderHanging />
+      {/* Interactive Nanotech Spider Web Canvas (Mouse reactive & Click THWIP) */}
+      <SpiderWebCanvas />
 
       {/* Background blueprint grid */}
       <div 
@@ -120,33 +121,35 @@ export const App: React.FC = () => {
   }
 
   return (
-    <CanvasCraftProvider>
-      <ModernPortfolioView
-        onSwitchToOS={switchToOS}
-        onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
-        onOpenLightbox={(project) => setSelectedLightboxProject(project)}
-      />
+    <StarkHudProvider>
+      <CanvasCraftProvider>
+        <ModernPortfolioView
+          onSwitchToOS={switchToOS}
+          onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+          onOpenLightbox={(project) => setSelectedLightboxProject(project)}
+        />
 
-      {/* Architecture Lightbox Modal */}
-      <ProjectLightbox
-        project={selectedLightboxProject}
-        onClose={() => setSelectedLightboxProject(null)}
-      />
+        {/* Architecture Lightbox Modal */}
+        <ProjectLightbox
+          project={selectedLightboxProject}
+          onClose={() => setSelectedLightboxProject(null)}
+        />
 
-      {/* Universal Command Palette (Ctrl+K) */}
-      <CommandPalette
-        isOpen={isCommandPaletteOpen}
-        onClose={() => setIsCommandPaletteOpen(false)}
-        onOpenOSApp={(appId) => switchToOS(appId)}
-        onSwitchOSTheme={(th) => {
-          setOSTheme(th);
-          switchToOS();
-        }}
-        onToggleMusic={() => soundFX.toggleAmbientMusic()}
-        onToggleGhosts={() => {}}
-        ghostsEnabled={false}
-      />
-    </CanvasCraftProvider>
+        {/* Universal Command Palette (Ctrl+K) */}
+        <CommandPalette
+          isOpen={isCommandPaletteOpen}
+          onClose={() => setIsCommandPaletteOpen(false)}
+          onOpenOSApp={(appId) => switchToOS(appId)}
+          onSwitchOSTheme={(th) => {
+            setOSTheme(th);
+            switchToOS();
+          }}
+          onToggleMusic={() => soundFX.toggleAmbientMusic()}
+          onToggleGhosts={() => {}}
+          ghostsEnabled={false}
+        />
+      </CanvasCraftProvider>
+    </StarkHudProvider>
   );
 };
 
