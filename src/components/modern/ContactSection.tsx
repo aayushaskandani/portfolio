@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { portfolioConfig } from '../../data/portfolioData';
 import { soundFX } from '../../utils/audio';
-import { Mail, Copy, Check, Github, Linkedin, Twitter, FileText, ArrowUpRight } from 'lucide-react';
+import { Mail, Copy, Check, Github, Linkedin, Phone, Code2, ArrowUpRight, FileText } from 'lucide-react';
 
 export const ContactSection: React.FC = () => {
   const { personal } = portfolioConfig;
@@ -24,14 +24,14 @@ export const ContactSection: React.FC = () => {
           LET'S BUILD <span className="text-brand-red">SOMETHING EXCEPTIONAL.</span>
         </h2>
         <p className="text-slate-300 text-sm sm:text-base mt-4 font-light leading-relaxed">
-          Have an opening, an ambitious systems challenge, or a project in mind? Let's build software that stands out and doesn't break under pressure.
+          Looking for a high-cadence Full-Stack / Backend Engineer who understands distributed state, low latency, and real production resilience? Reach out anytime!
         </p>
 
         {/* Big Email Card */}
         <div className="mt-8 p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">
-              DIRECT INBOX
+              DIRECT INBOX · JAIPUR, RAJASTHAN
             </div>
             <a
               href={`mailto:${personal.email}`}
@@ -60,7 +60,7 @@ export const ContactSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Social and Resume Links */}
+        {/* Social, LeetCode, Phone Links */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
           <a
             href={personal.github}
@@ -89,29 +89,27 @@ export const ContactSection: React.FC = () => {
           </a>
 
           <a
-            href={personal.twitter}
+            href={personal.leetcode}
             target="_blank"
             rel="noreferrer"
             onClick={() => soundFX.playClick()}
             className="p-3.5 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.08] hover:border-white/20 transition-all flex items-center justify-between group"
           >
-            <span className="font-mono text-xs text-slate-300 flex items-center gap-2">
-              <Twitter size={14} /> Twitter / X
+            <span className="font-mono text-xs text-amber-300 flex items-center gap-2">
+              <Code2 size={14} /> LeetCode
             </span>
             <ArrowUpRight size={13} className="text-slate-500 group-hover:text-white transition-colors" />
           </a>
 
           <a
-            href={personal.resumeUrl}
-            target="_blank"
-            rel="noreferrer"
+            href={`tel:${personal.phone}`}
             onClick={() => soundFX.playClick()}
-            className="p-3.5 rounded-xl bg-teal-950/20 hover:bg-teal-900/30 border border-teal-500/20 hover:border-teal-500/40 transition-all flex items-center justify-between group"
+            className="p-3.5 rounded-xl bg-emerald-950/20 hover:bg-emerald-900/30 border border-emerald-500/20 hover:border-emerald-500/40 transition-all flex items-center justify-between group"
           >
-            <span className="font-mono text-xs text-teal-300 flex items-center gap-2">
-              <FileText size={14} /> Resume PDF
+            <span className="font-mono text-xs text-emerald-300 flex items-center gap-2">
+              <Phone size={14} /> Call Direct
             </span>
-            <ArrowUpRight size={13} className="text-teal-400 group-hover:text-white transition-colors" />
+            <ArrowUpRight size={13} className="text-emerald-400 group-hover:text-white transition-colors" />
           </a>
         </div>
       </div>

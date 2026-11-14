@@ -126,37 +126,37 @@ export const Hero: React.FC<HeroProps> = ({ onSwitchToOS }) => {
         <div className="lg:col-span-5 grid grid-cols-2 gap-3.5 sm:gap-4">
           <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-all group">
             <div className="font-anton text-4xl sm:text-5xl text-brand-red group-hover:scale-105 transition-transform">
-              5+
+              359+
             </div>
             <div className="text-xs uppercase font-mono tracking-wider text-slate-300 mt-2 font-semibold">
-              Production Systems
+              GCP Labs Completed
             </div>
             <p className="text-[11px] text-slate-500 mt-1 leading-snug">
-              Microservices, stream engines & full-stack applications.
+              Arcade Legend · 121 Skill Badges · 55k+ Points
             </p>
           </div>
 
           <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-all group">
             <div className="font-anton text-4xl sm:text-5xl text-teal-400 group-hover:scale-105 transition-transform">
-              2,300+
+              200+
             </div>
             <div className="text-xs uppercase font-mono tracking-wider text-slate-300 mt-2 font-semibold">
-              Developers Reached
+              Students Coordinated
             </div>
             <p className="text-[11px] text-slate-500 mt-1 leading-snug">
-              Keynotes, hackathon mentorship & developer communities.
+              GDG on Campus Coordinator & Training Lead
             </p>
           </div>
 
           <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-all group">
             <div className="font-anton text-4xl sm:text-5xl text-amber-400 group-hover:scale-105 transition-transform">
-              &lt;100ms
+              &lt;15ms
             </div>
             <div className="text-xs uppercase font-mono tracking-wider text-slate-300 mt-2 font-semibold">
-              Telemetry Latency
+              Redirect Latency
             </div>
             <p className="text-[11px] text-slate-500 mt-1 leading-snug">
-              Asynchronous WebSockets & Kafka/Redis queuing.
+              Redis Cache-Aside Layer & Base62 Architecture
             </p>
           </div>
 
@@ -166,11 +166,11 @@ export const Hero: React.FC<HeroProps> = ({ onSwitchToOS }) => {
                 SYSTEM PHILOSOPHY
               </div>
               <p className="text-xs text-slate-300 mt-2 font-light italic leading-relaxed">
-                "Deterministic state under failure."
+                "Deterministic state, O(1) performance."
               </p>
             </div>
             <div className="text-[10px] font-mono text-slate-500 pt-2 border-t border-white/10 mt-3">
-              Built to withstand real traffic
+              Poornima University · B.Tech CSE
             </div>
           </div>
         </div>
