@@ -64,45 +64,48 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-[#08090d]/85 backdrop-blur-md border-b border-white/[0.08] px-4 sm:px-8 py-3.5 transition-all select-none font-sans">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo */}
+        {/* Logo & Brand Zone */}
         <a 
           href="#hero" 
           onClick={() => soundFX.playClick()}
-          className="group flex items-center gap-2.5 cursor-pointer"
+          className="group flex items-center gap-2.5 cursor-pointer shrink-0 mr-8 xl:mr-14"
         >
           <span className="w-2.5 h-2.5 rounded-full bg-brand-red group-hover:scale-125 transition-transform animate-pulse" />
-          <span className="font-anton text-xl tracking-wider text-white group-hover:text-brand-red transition-colors uppercase">
+          <span className="font-anton text-xl tracking-wider text-white group-hover:text-brand-red transition-colors uppercase whitespace-nowrap">
             {portfolioConfig.personal.name}
           </span>
-          <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full hidden sm:inline-block">
+          <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full hidden sm:inline-block whitespace-nowrap ml-1">
             PORTFOLIO.EXE
           </span>
         </a>
 
-        {/* Navigation links (Desktop) */}
-        <nav className="hidden lg:flex items-center gap-6 text-xs uppercase tracking-widest font-mono text-slate-400">
+        {/* Navigation links (Desktop) with Generous Breathing Space */}
+        <nav className="hidden lg:flex items-center justify-center gap-6 xl:gap-8 text-xs uppercase tracking-widest font-mono text-slate-400 px-4 xl:px-8 flex-1">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onClick={() => soundFX.playClick()}
-              className="hover:text-white transition-colors py-1 cursor-pointer"
+              className="hover:text-white transition-colors py-1 cursor-pointer whitespace-nowrap"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
+        {/* Subtle Visual Divider before Actions */}
+        <div className="h-4 w-[1px] bg-white/15 hidden lg:block mr-5 xl:mr-7 shrink-0" />
+
         {/* Right Actions Bar */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0 ml-auto lg:ml-0">
           {/* Share Candidate Snippet Button */}
           <button
             onClick={handleShareCandidate}
-            className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 border border-purple-400/30 text-purple-300 hover:text-white transition-all text-xs font-mono cursor-pointer"
+            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 border border-purple-400/30 text-purple-300 hover:text-white transition-all text-xs font-mono cursor-pointer"
             title="Copy Slack/WhatsApp Candidate Pitch Snippet"
           >
             <Share2 size={13} />
-            <span>Share Profile</span>
+            <span className="whitespace-nowrap">Share Profile</span>
           </button>
 
           {/* Command Palette Button */}
