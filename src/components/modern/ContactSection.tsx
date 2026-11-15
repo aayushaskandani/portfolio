@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { portfolioConfig } from '../../data/portfolioData';
 import { soundFX } from '../../utils/audio';
 import { useCanvasCraft } from './CanvasCraftTour';
-import { Mail, Copy, Check, Github, Linkedin, Phone, Code2, ArrowUpRight, FileText } from 'lucide-react';
+import { Mail, Copy, Check, Github, Linkedin, Phone, Code2, ArrowUpRight, FileText, Share2 } from 'lucide-react';
 
 export const ContactSection: React.FC = () => {
   const { personal } = portfolioConfig;
   const [copied, setCopied] = useState(false);
+  const [portfolioCopied, setPortfolioCopied] = useState(false);
   const { registerRef } = useCanvasCraft();
 
   const copyEmail = () => {
@@ -14,6 +15,13 @@ export const ContactSection: React.FC = () => {
     navigator.clipboard.writeText(personal.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const copyPortfolioUrl = () => {
+    soundFX.playClick();
+    navigator.clipboard.writeText(personal.portfolioUrl || 'https://aayushaskandani.vercel.app');
+    setPortfolioCopied(true);
+    setTimeout(() => setPortfolioCopied(false), 2000);
   };
 
   return (
@@ -58,6 +66,15 @@ export const ContactSection: React.FC = () => {
               <FileText size={14} />
               <span>Resume PDF</span>
             </a>
+
+            <button
+              onClick={copyPortfolioUrl}
+              className="px-4 py-2.5 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-400/40 text-purple-300 font-mono text-xs flex items-center gap-2 transition-all cursor-pointer"
+              title="Copy Canonical Portfolio URL (aayushaskandani.vercel.app)"
+            >
+              {portfolioCopied ? <Check size={14} className="text-emerald-400" /> : <Share2 size={14} />}
+              <span>{portfolioCopied ? "URL Copied!" : "Share Profile"}</span>
+            </button>
 
             <button
               onClick={copyEmail}

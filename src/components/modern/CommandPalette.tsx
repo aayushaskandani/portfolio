@@ -18,7 +18,8 @@ import {
   Mail, 
   CornerDownLeft,
   Crosshair,
-  X
+  X,
+  Share2
 } from 'lucide-react';
 
 interface CommandPaletteProps {
@@ -243,6 +244,18 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       icon: <Crosshair size={15} className="text-cyan-400" />,
       action: () => {
         onToggleStarkHud?.();
+        onClose();
+      }
+    },
+    {
+      id: 'act-share-portfolio',
+      category: 'Actions',
+      title: 'Copy Portfolio URL to Clipboard',
+      subtitle: portfolioConfig.personal.portfolioUrl || 'https://aayushaskandani.vercel.app',
+      icon: <Share2 size={15} className="text-teal-400" />,
+      action: () => {
+        navigator.clipboard.writeText(portfolioConfig.personal.portfolioUrl || 'https://aayushaskandani.vercel.app');
+        soundFX.playClick();
         onClose();
       }
     },

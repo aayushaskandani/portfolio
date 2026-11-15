@@ -16,6 +16,8 @@ export const portfolioConfig = {
     leetcode: "https://leetcode.com/u/AayushAskandani",
     twitter: "https://twitter.com",
     resumeUrl: "/Aayush_Askandani_Resume.pdf",
+    portfolioUrl: "https://aayushaskandani.vercel.app",
+    domain: "aayushaskandani.vercel.app",
     statusBadge: "OPEN FOR SDE INTERNSHIPS & FULL-STACK ROLES",
   },
 
@@ -483,13 +485,13 @@ export const portfolioConfig = {
     welcomeMessage: "Windows PowerShell v7.4.2 [Ask Aayush Terminal]\nType 'help' to see available commands or ask questions directly.\n",
     commands: {
       help: "Available commands:\n  help        - Show this manual\n  whoami      - Developer bio, education & credentials\n  projects    - List engineering projects with live URLs\n  skills      - List complete technical stack\n  story       - 9-chapter journey logs\n  interview   - Launch AI voice interviewer\n  milestones  - Google Cloud Arcade Legend & GDG leadership\n  contact     - Get phone, email, and social handles\n  clear       - Clear terminal buffer\n  sudo hire   - Fast-track interview pipeline",
-      whoami: "Aayush Askandani — Full-Stack Software Engineer & Systems Builder.\nB.Tech CSE at Poornima University (2024–2028, CGPA 7.7/10)\nGoogle Cloud Arcade Legend (359 labs, 121 skill badges, 55,267 points)\nCommunity Coordinator & Training Lead at GDG on Campus",
+      whoami: "Aayush Askandani — Full-Stack Software Engineer & Systems Builder.\nPortfolio: https://aayushaskandani.vercel.app\nB.Tech CSE at Poornima University (2024–2028, CGPA 7.7/10)\nGoogle Cloud Arcade Legend (359 labs, 121 skill badges, 55,267 points)\nCommunity Coordinator & Training Lead at GDG on Campus",
       projects: "1. LINKFORGE · High-Throughput URL Shortener & Bio-Link (React, Node, PostgreSQL, Redis)\n   Live: https://link-forge-webapp.vercel.app | Repo: https://github.com/aayushaskandani/LinkForge\n2. SYNCBOARD · Real-Time Collaborative Kanban (React 19, Socket.IO, PostgreSQL O(1) Indexing)\n   Live: https://syncboard-2byi.onrender.com | Repo: https://github.com/aayushaskandani/syncboard\n3. TREKPEDIA · Offline Mountain Trek Encyclopedia (JavaScript, Supabase, Leaflet, Claude API)\n   Live: https://trekpedia.netlify.app | Repo: https://github.com/aayushaskandani/TrekPedia\nInspect BUILDER_LAB.EXE or modern Work section for full architecture dossiers.",
       skills: "Languages: Java, Python, JavaScript, TypeScript\nFrontend: React 19, Vite, Tailwind CSS, Leaflet.js, PWA Service Workers\nBackend: Node.js, Express.js, FastAPI, Socket.IO, REST APIs, JWT Auth\nDatabases: PostgreSQL, Redis, MySQL, MongoDB, Supabase\nDevOps & Tools: Docker, Git, GitHub Actions, Linux, Postman, Render, Vercel",
       story: "9 Chapters available: CH01 (Old Laptop) through CH09 (Systems Builder).\nInspect STORY_MODE.EXE or modern story section for complete narrative logs.",
       interview: "Interactive AI Voice Interviewer active. Ask questions about LinkForge, SyncBoard, TrekPedia, or system design.",
       milestones: "• Google Cloud Arcade Legend: 359 labs, 76 courses, 121 badges, 55,267 points\n• GDG on Campus: Community Coordinator & Training Lead (200+ students)\n• McKinsey.org Forward Program Graduate\n• Google Cloud Career Launchpad – Data Analytics\n• IBM Artificial Intelligence Fundamentals",
-      contact: "Phone: +91 85049 54425\nEmail: aayushaskandani64@gmail.com\nGitHub: https://github.com/aayushaskandani\nLinkedIn: https://linkedin.com/in/aayush-askandani\nLeetCode: https://leetcode.com/u/AayushAskandani",
+      contact: "Phone: +91 85049 54425\nEmail: aayushaskandani64@gmail.com\nPortfolio: https://aayushaskandani.vercel.app\nGitHub: https://github.com/aayushaskandani\nLinkedIn: https://linkedin.com/in/aayush-askandani\nLeetCode: https://leetcode.com/u/AayushAskandani",
       "sudo hire": "ACCESS GRANTED: Priority interview pipeline unlocked. Send an offer or interview invite to aayushaskandani64@gmail.com or call +91 85049 54425. Let's build exceptional software together!",
     }
   }

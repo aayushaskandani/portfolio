@@ -31,6 +31,7 @@ export const RecruiterApp: React.FC = () => {
           </div>
           <div className="text-right text-xs text-slate-600 font-mono mt-2 sm:mt-0 space-y-0.5">
             <div>📍 {personal.location}</div>
+            <div>🌐 <a href={personal.portfolioUrl || "https://aayushaskandani.vercel.app"} target="_blank" rel="noreferrer" className="text-blue-700 hover:underline font-semibold">aayushaskandani.vercel.app</a></div>
             <div>✉️ {personal.email}</div>
             <div>📞 {personal.phone}</div>
           </div>
