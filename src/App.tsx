@@ -13,17 +13,32 @@ import { WindowManager } from './components/os/WindowManager';
 import { CommandPalette } from './components/modern/CommandPalette';
 import { ProjectLightbox } from './components/modern/ProjectLightbox';
 import { CanvasCraftProvider, useCanvasCraft } from './components/modern/CanvasCraftTour';
-import { StarkHudProvider } from './components/modern/StarkJarvisHUD';
+import { StarkHudProvider, useStarkHud } from './components/modern/StarkJarvisHUD';
 import { SpiderWebCanvas } from './components/modern/SpiderWebCanvas';
 import { soundFX } from './utils/audio';
 
-// Inner Modern Layout that uses the Canvas Craft context
+// Inner Modern Layout that uses both Canvas Craft and Stark HUD contexts
 const ModernPortfolioView: React.FC<{
   onSwitchToOS: (openAppId?: string) => void;
   onOpenCommandPalette: () => void;
   onOpenLightbox: (project: Project) => void;
-}> = ({ onSwitchToOS, onOpenCommandPalette, onOpenLightbox }) => {
+  isCommandPaletteOpen: boolean;
+  onCloseCommandPalette: () => void;
+  onSwitchOSTheme: (theme: OSTheme) => void;
+  selectedLightboxProject: Project | null;
+  onCloseLightbox: () => void;
+}> = ({
+  onSwitchToOS,
+  onOpenCommandPalette,
+  onOpenLightbox,
+  isCommandPaletteOpen,
+  onCloseCommandPalette,
+  onSwitchOSTheme,
+  selectedLightboxProject,
+  onCloseLightbox
+}) => {
   const { rebuildCanvas } = useCanvasCraft();
+  const { toggleStarkHud } = useStarkHud();
 
   return (
     <div className="min-h-screen bg-[#08090d] text-white flex flex-col selection:bg-brand-red selection:text-white relative overflow-x-hidden">
@@ -65,6 +80,22 @@ const ModernPortfolioView: React.FC<{
 
       {/* Modern Footer */}
       <Footer onSwitchToOS={() => onSwitchToOS()} />
+
+      {/* Architecture Lightbox Modal */}
+      <ProjectLightbox
+        project={selectedLightboxProject}
+        onClose={onCloseLightbox}
+      />
+
+      {/* Universal Command Palette (Ctrl+K) */}
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={onCloseCommandPalette}
+        onOpenOSApp={(appId) => onSwitchToOS(appId)}
+        onSwitchOSTheme={onSwitchOSTheme}
+        onToggleMusic={() => soundFX.toggleAmbientMusic()}
+        onToggleStarkHud={toggleStarkHud}
+      />
     </div>
   );
 };
@@ -106,15 +137,12 @@ export const App: React.FC = () => {
           theme={osTheme}
           onThemeChange={setOSTheme}
         />
-        {/* Command palette also accessible in OS mode */}
         <CommandPalette
           isOpen={isCommandPaletteOpen}
           onClose={() => setIsCommandPaletteOpen(false)}
           onOpenOSApp={(appId) => switchToOS(appId)}
           onSwitchOSTheme={(th) => setOSTheme(th)}
           onToggleMusic={() => soundFX.toggleAmbientMusic()}
-          onToggleGhosts={() => {}}
-          ghostsEnabled={false}
         />
       </>
     );
@@ -127,26 +155,14 @@ export const App: React.FC = () => {
           onSwitchToOS={switchToOS}
           onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
           onOpenLightbox={(project) => setSelectedLightboxProject(project)}
-        />
-
-        {/* Architecture Lightbox Modal */}
-        <ProjectLightbox
-          project={selectedLightboxProject}
-          onClose={() => setSelectedLightboxProject(null)}
-        />
-
-        {/* Universal Command Palette (Ctrl+K) */}
-        <CommandPalette
-          isOpen={isCommandPaletteOpen}
-          onClose={() => setIsCommandPaletteOpen(false)}
-          onOpenOSApp={(appId) => switchToOS(appId)}
+          isCommandPaletteOpen={isCommandPaletteOpen}
+          onCloseCommandPalette={() => setIsCommandPaletteOpen(false)}
           onSwitchOSTheme={(th) => {
             setOSTheme(th);
             switchToOS();
           }}
-          onToggleMusic={() => soundFX.toggleAmbientMusic()}
-          onToggleGhosts={() => {}}
-          ghostsEnabled={false}
+          selectedLightboxProject={selectedLightboxProject}
+          onCloseLightbox={() => setSelectedLightboxProject(null)}
         />
       </CanvasCraftProvider>
     </StarkHudProvider>

@@ -17,6 +17,7 @@ import {
   Users, 
   Mail, 
   CornerDownLeft,
+  Crosshair,
   X
 } from 'lucide-react';
 
@@ -26,8 +27,7 @@ interface CommandPaletteProps {
   onOpenOSApp: (appId: string) => void;
   onSwitchOSTheme: (theme: OSTheme) => void;
   onToggleMusic: () => void;
-  onToggleGhosts: () => void;
-  ghostsEnabled: boolean;
+  onToggleStarkHud?: () => void;
 }
 
 interface CommandItem {
@@ -45,8 +45,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   onOpenOSApp,
   onSwitchOSTheme,
   onToggleMusic,
-  onToggleGhosts,
-  ghostsEnabled
+  onToggleStarkHud
 }) => {
   const [search, setSearch] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -237,13 +236,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       }
     },
     {
-      id: 'act-ghosts',
+      id: 'act-stark-hud',
       category: 'Actions',
-      title: ghostsEnabled ? 'Hide Ghost Cursors' : 'Show Multi-Cursor Simulation',
-      subtitle: 'Virtual visitors and bots browsing the portfolio in real time',
-      icon: <Users size={15} className="text-purple-400" />,
+      title: 'Toggle Stark Tactical HUD & Scanner',
+      subtitle: 'Activate holographic diagnostics & project target locks',
+      icon: <Crosshair size={15} className="text-cyan-400" />,
       action: () => {
-        onToggleGhosts();
+        onToggleStarkHud?.();
         onClose();
       }
     },

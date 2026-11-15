@@ -47,7 +47,18 @@ export const ContactSection: React.FC = () => {
             </a>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <a
+              href={personal.resumeUrl}
+              download="Aayush_Askandani_Resume.pdf"
+              onClick={() => soundFX.playClick()}
+              className="px-4 py-2.5 rounded-xl bg-teal-500/15 hover:bg-teal-500/25 border border-teal-400/40 text-teal-300 font-mono text-xs flex items-center gap-2 transition-all cursor-pointer"
+              title="Download Official Resume PDF"
+            >
+              <FileText size={14} />
+              <span>Resume PDF</span>
+            </a>
+
             <button
               onClick={copyEmail}
               className="px-4 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-slate-200 font-mono text-xs flex items-center gap-2 transition-all cursor-pointer"

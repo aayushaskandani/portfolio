@@ -63,18 +63,6 @@ export type ViewMode = 'modern' | 'os';
 
 export type OSTheme = 'win98' | 'win11' | 'ubuntu';
 
-export interface GhostCursor {
-  id: string;
-  name: string;
-  role: string;
-  color: string;
-  x: number;
-  y: number;
-  targetX: number;
-  targetY: number;
-  isClicking: boolean;
-}
-
 export interface InterviewQnA {
   id: string;
   label: string;

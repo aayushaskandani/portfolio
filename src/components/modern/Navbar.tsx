@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { portfolioConfig } from '../../data/portfolioData';
 import { soundFX } from '../../utils/audio';
-import { Monitor, Volume2, VolumeX, Music, Users, Search, Sparkles } from 'lucide-react';
+import { Monitor, Volume2, VolumeX, Music, Search, Sparkles, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   onSwitchToOS: () => void;
@@ -16,6 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [soundEnabled, setSoundEnabled] = useState(soundFX.enabled);
   const [musicPlaying, setMusicPlaying] = useState(soundFX.isMusicPlaying);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const unsub = soundFX.subscribeMusicState((playing) => {
@@ -64,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </span>
         </a>
 
-        {/* Navigation links */}
+        {/* Navigation links (Desktop) */}
         <nav className="hidden lg:flex items-center gap-6 text-xs uppercase tracking-widest font-mono text-slate-400">
           {navLinks.map((link) => (
             <a
@@ -158,8 +159,39 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="hidden sm:inline">Launch OS Desktop</span>
             <span className="sm:hidden">OS Mode</span>
           </button>
+
+          {/* Mobile Menu Hamburger Toggle */}
+          <button
+            onClick={() => {
+              soundFX.playClick();
+              setMobileMenuOpen(prev => !prev);
+            }}
+            className="lg:hidden p-1.5 rounded-xl bg-white/[0.04] border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer"
+            title="Toggle Navigation Menu"
+          >
+            {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden mt-3 pt-3 border-t border-white/[0.08] grid grid-cols-3 gap-2 text-center text-xs font-mono uppercase tracking-wider text-slate-300">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={() => {
+                soundFX.playClick();
+                setMobileMenuOpen(false);
+              }}
+              className="py-2 px-1 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] hover:text-white transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
     </header>
   );
 };
