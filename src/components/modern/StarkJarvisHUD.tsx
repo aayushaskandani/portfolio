@@ -1,17 +1,15 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import { soundFX } from '../../utils/audio';
-import { Zap, ShieldCheck, Activity, Terminal, X, Volume2, Sparkles, ChevronRight, Eye, Crosshair } from 'lucide-react';
+import { Activity, Terminal, X, Crosshair } from 'lucide-react';
 
 interface StarkHudContextType {
   isStarkHudActive: boolean;
   toggleStarkHud: () => void;
-  triggerSpiderSense: () => void;
 }
 
 const StarkHudContext = createContext<StarkHudContextType>({
   isStarkHudActive: false,
-  toggleStarkHud: () => {},
-  triggerSpiderSense: () => {}
+  toggleStarkHud: () => {}
 });
 
 export const useStarkHud = () => useContext(StarkHudContext);
@@ -47,21 +45,14 @@ export const StarkHudProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [isStarkHudActive, setIsStarkHudActive] = useState<boolean>(false);
   const [isConsoleOpen, setIsConsoleOpen] = useState<boolean>(false);
   const [activeDossierIndex, setActiveDossierIndex] = useState<number>(0);
-  const [spiderSensePulse, setSpiderSensePulse] = useState<boolean>(false);
 
   const toggleStarkHud = () => {
     soundFX.playJarvisChime();
     setIsStarkHudActive(prev => !prev);
   };
 
-  const triggerSpiderSense = () => {
-    soundFX.playSpiderSenseAlert();
-    setSpiderSensePulse(true);
-    setTimeout(() => setSpiderSensePulse(false), 800);
-  };
-
   return (
-    <StarkHudContext.Provider value={{ isStarkHudActive, toggleStarkHud, triggerSpiderSense }}>
+    <StarkHudContext.Provider value={{ isStarkHudActive, toggleStarkHud }}>
       {children}
 
       {/* STARK TACTICAL HUD OVERLAY (When Toggled Active) */}
@@ -104,22 +95,13 @@ export const StarkHudProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         </div>
       )}
 
-      {/* Spider-Sense Precognitive Wave Ripple on Screen */}
-      {spiderSensePulse && (
-        <div className="fixed inset-0 pointer-events-none z-[90] flex items-center justify-center">
-          <div className="w-[600px] h-[600px] rounded-full border-2 border-red-500/80 shadow-[0_0_60px_rgba(239,68,68,0.6)] animate-ping opacity-75" />
-          <div className="w-[300px] h-[300px] rounded-full border-2 border-amber-400/90 shadow-[0_0_40px_rgba(245,158,11,0.5)] animate-ping opacity-90" style={{ animationDuration: '0.4s' }} />
-        </div>
-      )}
-
       {/* FLOATING STARK ARC REACTOR / J.A.R.V.I.S. DOCK BEACON (Bottom Right) */}
       <div className="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-[95] select-none flex flex-col items-end gap-2">
-        {/* Expanded Quick Menu Pill on Hover/Active */}
         <div className="flex items-center gap-2 bg-[#090d1a]/95 backdrop-blur-xl border border-cyan-500/40 p-1.5 rounded-full shadow-[0_0_30px_rgba(0,240,255,0.25)] text-xs font-mono">
           {/* Tactical HUD Toggle */}
           <button
             onClick={toggleStarkHud}
-            className={`px-3 py-1.5 rounded-full flex items-center gap-1.5 transition-all cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-full flex items-center gap-1.5 transition-all cursor-pointer ${
               isStarkHudActive
                 ? 'bg-cyan-500 text-black font-bold shadow-[0_0_15px_#00f0ff]'
                 : 'hover:bg-cyan-500/20 text-cyan-300'
@@ -127,19 +109,9 @@ export const StarkHudProvider: React.FC<{ children: React.ReactNode }> = ({ chil
             title="Toggle Stark Tactical HUD overlay"
           >
             <Crosshair size={13} className={isStarkHudActive ? 'animate-spin' : ''} />
-            <span className="hidden sm:inline font-semibold">
+            <span className="font-semibold">
               {isStarkHudActive ? 'HUD ACTIVE' : 'STARK HUD'}
             </span>
-          </button>
-
-          {/* Spider-Sense Quick Pulse */}
-          <button
-            onClick={triggerSpiderSense}
-            className="px-2.5 py-1.5 rounded-full hover:bg-red-500/20 text-rose-400 hover:text-white transition-all cursor-pointer flex items-center gap-1"
-            title="Trigger Spider-Sense Architecture Scan"
-          >
-            <Zap size={13} />
-            <span className="hidden sm:inline text-[11px]">SPIDER-SENSE</span>
           </button>
 
           {/* J.A.R.V.I.S. Interactive Console Trigger */}
@@ -153,7 +125,6 @@ export const StarkHudProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           >
             {/* Animated Rotating Arc Reactor Core SVG */}
             <div className="relative w-7 h-7 flex items-center justify-center">
-              {/* Outer Counter-Rotating Dashed Ring */}
               <svg className="absolute inset-0 w-full h-full animate-[spin_10s_linear_infinite]" viewBox="0 0 36 36">
                 <circle
                   cx="18"
@@ -166,7 +137,6 @@ export const StarkHudProvider: React.FC<{ children: React.ReactNode }> = ({ chil
                   opacity="0.8"
                 />
               </svg>
-              {/* Inner Pulsing Triangle Arc Reactor Core */}
               <div className="w-3 h-3 bg-gradient-to-tr from-cyan-400 to-amber-300 rounded-sm shadow-[0_0_8px_#00f0ff] animate-pulse" />
             </div>
           </button>
@@ -259,28 +229,18 @@ export const StarkHudProvider: React.FC<{ children: React.ReactNode }> = ({ chil
             </div>
 
             {/* Bottom Controls */}
-            <div className="relative mt-6 pt-4 border-t border-cyan-500/20 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+            <div className="relative mt-6 pt-4 border-t border-cyan-500/20 flex items-center justify-between gap-3 text-xs font-mono">
               <div className="flex items-center gap-2 text-slate-400">
                 <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
                 <span>VOICE SYNTHESIS: WEBAUDIO_64K</span>
               </div>
 
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={triggerSpiderSense}
-                  className="px-3.5 py-1.5 rounded-lg bg-red-500/15 hover:bg-red-500/25 border border-red-500/40 text-red-300 transition-all cursor-pointer flex items-center gap-1.5"
-                >
-                  <Zap size={13} />
-                  <span>Run Spider-Sense Scan</span>
-                </button>
-
-                <button
-                  onClick={() => setIsConsoleOpen(false)}
-                  className="px-4 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer"
-                >
-                  Close Console
-                </button>
-              </div>
+              <button
+                onClick={() => setIsConsoleOpen(false)}
+                className="px-4 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer"
+              >
+                Close Console
+              </button>
             </div>
           </div>
         </div>

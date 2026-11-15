@@ -90,17 +90,11 @@ export const WorkSection: React.FC<WorkSectionProps> = ({ onOpenDossier, onOpenL
             className="group relative rounded-2xl bg-gradient-to-b from-[#141624] to-[#0c0d16] border border-white/[0.08] hover:border-cyan-400/50 transition-all duration-200 flex flex-col justify-between overflow-hidden p-6 sm:p-7 shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10 will-change-transform"
             style={{ transformStyle: 'preserve-3d' }}
           >
-            {/* Stark Nanotech Corner Brackets & Web Filigree */}
+            {/* Stark Nanotech Corner Brackets */}
             <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none" />
             <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none" />
             <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none" />
             <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none" />
-
-            {/* Geometric Nanotech Spider Web Corner Lattice (SVG) */}
-            <svg className="absolute top-0 right-0 w-20 h-20 pointer-events-none opacity-20 group-hover:opacity-40 transition-opacity overflow-hidden" viewBox="0 0 80 80">
-              <path d="M80 0 L0 80 M80 20 L20 80 M80 40 L40 80 M80 60 L60 80" stroke="#00f0ff" strokeWidth="0.8" />
-              <path d="M50 0 C65 15 65 15 80 30 M30 0 C55 25 55 25 80 50" stroke="#e11d48" strokeWidth="0.8" />
-            </svg>
 
             {/* Stark Tactical HUD Target Lock Overlay (When HUD is active) */}
             {isStarkHudActive && (

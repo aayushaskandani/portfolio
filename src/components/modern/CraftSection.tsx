@@ -1,8 +1,7 @@
 import React from 'react';
 import { portfolioConfig } from '../../data/portfolioData';
 import { useCanvasCraft } from './CanvasCraftTour';
-import { ShieldCheck, Sparkles, Award, CheckCircle2, Cloud, Cpu, Terminal } from 'lucide-react';
-import { IronSpiderSuspension } from './IronSpiderSuspension';
+import { ShieldCheck, Cloud, Cpu } from 'lucide-react';
 
 export const CraftSection: React.FC = () => {
   const { arsenal, personal } = portfolioConfig;
@@ -176,11 +175,6 @@ export const CraftSection: React.FC = () => {
             </span>
           </div>
         </div>
-      </div>
-
-      {/* STARK NANOTECH HARDWARE SUITE: REVERSE-SUSPENDED IRON SPIDER APPARATUS */}
-      <div className="mt-14">
-        <IronSpiderSuspension />
       </div>
     </section>
   );

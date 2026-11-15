@@ -102,28 +102,6 @@ class SoundFX {
     setTimeout(() => this.playFrequency(1046.50, 0.12, 'triangle', 0.04), 110); // C6
   }
 
-  // Spider-Sense precognitive high-frequency harmonic pulse
-  playSpiderSenseAlert() {
-    if (!this.enabled) return;
-    try {
-      const ctx = this.getContext();
-      if (!ctx) return;
-      const now = ctx.currentTime;
-      [880, 1174.66, 1760].forEach((freq, i) => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, now + i * 0.04);
-        gain.gain.setValueAtTime(0.035, now + i * 0.04);
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.04 + 0.18);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(now + i * 0.04);
-        osc.stop(now + i * 0.04 + 0.18);
-      });
-    } catch {}
-  }
-
   // Tactical HUD target lock chirp
   playTargetLock() {
     this.playFrequency(1200, 0.03, 'sine', 0.035);
@@ -148,28 +126,6 @@ class SoundFX {
       gain.connect(ctx.destination);
       osc.start(now);
       osc.stop(now + 0.06);
-    } catch {}
-  }
-
-  // Spider-Man Web "THWIP!" sound synthesizer
-  playWebThwip() {
-    if (!this.enabled) return;
-    try {
-      const ctx = this.getContext();
-      if (!ctx) return;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(2400, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.07);
-
-      gain.gain.setValueAtTime(0.06, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.07);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.07);
     } catch {}
   }
 

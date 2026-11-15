@@ -14,7 +14,6 @@ import { CommandPalette } from './components/modern/CommandPalette';
 import { ProjectLightbox } from './components/modern/ProjectLightbox';
 import { CanvasCraftProvider, useCanvasCraft } from './components/modern/CanvasCraftTour';
 import { StarkHudProvider, useStarkHud } from './components/modern/StarkJarvisHUD';
-import { SpiderWebCanvas } from './components/modern/SpiderWebCanvas';
 import { soundFX } from './utils/audio';
 
 // Inner Modern Layout that uses both Canvas Craft and Stark HUD contexts
@@ -42,9 +41,6 @@ const ModernPortfolioView: React.FC<{
 
   return (
     <div className="min-h-screen bg-[#08090d] text-white flex flex-col selection:bg-brand-red selection:text-white relative overflow-x-hidden">
-      {/* Interactive Nanotech Spider Web Canvas (Mouse reactive & Click THWIP) */}
-      <SpiderWebCanvas />
-
       {/* Background blueprint grid */}
       <div 
         className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
