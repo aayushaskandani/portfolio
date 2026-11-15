@@ -2,7 +2,8 @@ import React from 'react';
 import { portfolioConfig } from '../../data/portfolioData';
 import { soundFX } from '../../utils/audio';
 import { useCanvasCraft } from './CanvasCraftTour';
-import { ArrowDownRight, Terminal, Layers, Mic, ExternalLink } from 'lucide-react';
+import { ArrowDownRight, Terminal, Layers, Mic, ExternalLink, Share2 } from 'lucide-react';
+import { MagneticButton } from '../common/MagneticButton';
 
 interface HeroProps {
   onSwitchToOS: (openAppId?: string) => void;
@@ -57,14 +58,17 @@ export const Hero: React.FC<HeroProps> = ({ onSwitchToOS }) => {
 
           {/* Action Buttons */}
           <div className="flex flex-wrap items-center gap-3 pt-3">
-            <a
-              href="#work"
-              onClick={() => soundFX.playClick()}
-              className="px-5 py-3 rounded-xl bg-brand-red hover:bg-brand-redHover text-white font-medium text-sm flex items-center gap-2 shadow-lg shadow-brand-red/20 transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+            <MagneticButton
+              onClick={() => {
+                soundFX.playClick();
+                const el = document.getElementById('work');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-5 py-3 rounded-xl bg-brand-red hover:bg-brand-redHover text-white font-medium text-sm flex items-center gap-2 shadow-lg shadow-brand-red/20 transition-all cursor-pointer"
             >
               <span>Explore Selected Work</span>
               <ArrowDownRight size={16} />
-            </a>
+            </MagneticButton>
 
             <button
               onClick={() => {

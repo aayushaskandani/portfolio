@@ -105,23 +105,82 @@ export const ProjectLightbox: React.FC<ProjectLightboxProps> = ({ project, onClo
               {project.architecture}
             </p>
 
-            {/* Architecture Node Flowchart */}
-            <div className="pt-2 flex flex-wrap items-center gap-2">
-              <div className="px-3 py-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 font-mono text-[11px] font-medium">
-                1. Client Interactive Topology UI
+            {/* Visual System Architecture Data-Flow */}
+            <div className="pt-2">
+              <div className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest font-bold mb-2">
+                DATA-PIPELINE TOPOLOGY FLOW:
               </div>
-              <span className="text-slate-600 font-mono">→</span>
-              <div className="px-3 py-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-300 font-mono text-[11px] font-medium">
-                2. Asynchronous Ingestion & SWR
-              </div>
-              <span className="text-slate-600 font-mono">→</span>
-              <div className="px-3 py-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono text-[11px] font-medium">
-                3. Redis Event Queue & PgBouncer
-              </div>
-              <span className="text-slate-600 font-mono">→</span>
-              <div className="px-3 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-mono text-[11px] font-medium">
-                4. Simulation & Telemetry Store
-              </div>
+
+              {project.id === 'linkforge' ? (
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 font-mono text-[11px]">
+                  <div className="p-2.5 rounded-lg bg-cyan-950/40 border border-cyan-500/30 text-cyan-300">
+                    <div className="text-[9px] text-slate-400">01. INGRESS</div>
+                    <div className="font-bold mt-0.5">Cloudflare Edge</div>
+                    <div className="text-[9px] text-slate-400 mt-1">WAF &amp; Geo-Routing</div>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-purple-950/40 border border-purple-500/30 text-purple-300">
+                    <div className="text-[9px] text-slate-400">02. GATEWAY</div>
+                    <div className="font-bold mt-0.5">FastAPI &amp; Rate Limiter</div>
+                    <div className="text-[9px] text-slate-400 mt-1">Sliding-Window Algo</div>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300">
+                    <div className="text-[9px] text-slate-400">03. CACHE-ASIDE</div>
+                    <div className="font-bold mt-0.5">Redis Cluster</div>
+                    <div className="text-[9px] text-emerald-400 mt-1">&lt;15ms Redirects (RAM)</div>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-amber-950/40 border border-amber-500/30 text-amber-300">
+                    <div className="text-[9px] text-slate-400">04. PERSISTENCE</div>
+                    <div className="font-bold mt-0.5">PostgreSQL Pool</div>
+                    <div className="text-[9px] text-slate-400 mt-1">ACID &amp; Click Telemetry</div>
+                  </div>
+                </div>
+              ) : project.id === 'syncboard' ? (
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 font-mono text-[11px]">
+                  <div className="p-2.5 rounded-lg bg-cyan-950/40 border border-cyan-500/30 text-cyan-300">
+                    <div className="text-[9px] text-slate-400">01. CLIENT UI</div>
+                    <div className="font-bold mt-0.5">React 19 Optimistic</div>
+                    <div className="text-[9px] text-slate-400 mt-1">Instant Local State</div>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-purple-950/40 border border-purple-500/30 text-purple-300">
+                    <div className="text-[9px] text-slate-400">02. REALTIME</div>
+                    <div className="font-bold mt-0.5">Socket.IO Rooms</div>
+                    <div className="text-[9px] text-slate-400 mt-1">Board-Scoped Broadcast</div>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300">
+                    <div className="text-[9px] text-slate-400">03. INDEXING</div>
+                    <div className="font-bold mt-0.5">O(1) Fractional Index</div>
+                    <div className="text-[9px] text-emerald-400 mt-1">Zero Mass-Shift</div>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-amber-950/40 border border-amber-500/30 text-amber-300">
+                    <div className="text-[9px] text-slate-400">04. DATABASE</div>
+                    <div className="font-bold mt-0.5">PostgreSQL Master</div>
+                    <div className="text-[9px] text-slate-400 mt-1">Row-Level Locks</div>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 font-mono text-[11px]">
+                  <div className="p-2.5 rounded-lg bg-cyan-950/40 border border-cyan-500/30 text-cyan-300">
+                    <div className="text-[9px] text-slate-400">01. CLIENT OFFLINE</div>
+                    <div className="font-bold mt-0.5">PWA Service Worker</div>
+                    <div className="text-[9px] text-slate-400 mt-1">CacheStorage API</div>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-purple-950/40 border border-purple-500/30 text-purple-300">
+                    <div className="text-[9px] text-slate-400">02. SPATIAL MAPS</div>
+                    <div className="font-bold mt-0.5">Leaflet.js Engine</div>
+                    <div className="text-[9px] text-slate-400 mt-1">GeoJSON Vector Trails</div>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300">
+                    <div className="text-[9px] text-slate-400">03. AI INTELLIGENCE</div>
+                    <div className="font-bold mt-0.5">Claude NLP Routing</div>
+                    <div className="text-[9px] text-emerald-400 mt-1">Natural-Language Search</div>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-amber-950/40 border border-amber-500/30 text-amber-300">
+                    <div className="text-[9px] text-slate-400">04. EXPEDITIONS</div>
+                    <div className="font-bold mt-0.5">210+ Himalayan Treks</div>
+                    <div className="text-[9px] text-slate-400 mt-1">Full Offline Readiness</div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

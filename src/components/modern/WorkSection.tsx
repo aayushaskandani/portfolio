@@ -5,6 +5,7 @@ import { soundFX } from '../../utils/audio';
 import { useCanvasCraft } from './CanvasCraftTour';
 import { useStarkHud } from './StarkJarvisHUD';
 import { ExternalLink, Github, BookOpen, Layers, Sparkles, Cpu, Crosshair } from 'lucide-react';
+import { LinkForgeSimulator, SyncBoardSimulator } from './ProjectSimulator';
 
 interface WorkSectionProps {
   onOpenDossier: (projectId: string) => void;
@@ -144,6 +145,10 @@ export const WorkSection: React.FC<WorkSectionProps> = ({ onOpenDossier, onOpenL
                   </span>
                 )}
               </div>
+
+              {/* Interactive Live Micro-Simulator */}
+              {project.id === 'linkforge' && <LinkForgeSimulator />}
+              {project.id === 'syncboard' && <SyncBoardSimulator />}
             </div>
 
             {/* Bottom Actions */}

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { portfolioConfig } from '../../data/portfolioData';
 import { soundFX } from '../../utils/audio';
-import { Monitor, Volume2, VolumeX, Music, Search, Sparkles, Menu, X } from 'lucide-react';
+import { Monitor, Volume2, VolumeX, Music, Search, Sparkles, Menu, X, Share2, Check } from 'lucide-react';
+import { MagneticButton } from '../common/MagneticButton';
 
 interface NavbarProps {
   onSwitchToOS: () => void;
@@ -17,6 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [soundEnabled, setSoundEnabled] = useState(soundFX.enabled);
   const [musicPlaying, setMusicPlaying] = useState(soundFX.isMusicPlaying);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [shareToast, setShareToast] = useState(false);
 
   useEffect(() => {
     const unsub = soundFX.subscribeMusicState((playing) => {
@@ -36,6 +38,18 @@ export const Navbar: React.FC<NavbarProps> = ({
   const toggleMusic = () => {
     const isNowPlaying = soundFX.toggleAmbientMusic();
     setMusicPlaying(isNowPlaying);
+  };
+
+  const handleShareCandidate = () => {
+    soundFX.playVoiceChime();
+    const currentUrl = typeof window !== 'undefined' ? window.location.origin : 'https://developeraayush.vercel.app';
+    const profileSnippet = `🚀 Engineering Candidate Profile: Aayush Askandani\n• Role: Full-Stack & Distributed Systems Engineer\n• Education: B.Tech CSE (2024–2028), Poornima University (CGPA 7.7)\n• Flagship Systems: LinkForge (<15ms Redis cache-aside), SyncBoard (O(1) PostgreSQL fractional indexing)\n• Credentials: Google Cloud Arcade Legend (359 labs, 121 badges), GDG Campus Lead (200+ students)\n• Portfolio: ${currentUrl}\n• Direct Contact: ${portfolioConfig.personal.email} | ${portfolioConfig.personal.phone}`;
+    
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(profileSnippet);
+    }
+    setShareToast(true);
+    setTimeout(() => setShareToast(false), 2800);
   };
 
   const navLinks = [
@@ -81,6 +95,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Right Actions Bar */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Share Candidate Snippet Button */}
+          <button
+            onClick={handleShareCandidate}
+            className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 border border-purple-400/30 text-purple-300 hover:text-white transition-all text-xs font-mono cursor-pointer"
+            title="Copy Slack/WhatsApp Candidate Pitch Snippet"
+          >
+            <Share2 size={13} />
+            <span>Share Profile</span>
+          </button>
+
           {/* Command Palette Button */}
           <button
             onClick={() => {
@@ -97,19 +121,19 @@ export const Navbar: React.FC<NavbarProps> = ({
             </kbd>
           </button>
 
-          {/* Rebuild Canvas Tour Button */}
-          <button
+          {/* Rebuild Canvas Tour Button with Magnetic Hover */}
+          <MagneticButton
             onClick={() => {
               soundFX.playWarp();
               onRebuildCanvas();
             }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#ff3b3b] to-[#dc2626] hover:from-[#ff5252] hover:to-[#ef4444] text-white text-xs font-semibold shadow-lg shadow-red-500/25 transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#ff3b3b] to-[#dc2626] hover:from-[#ff5252] hover:to-[#ef4444] text-white text-xs font-semibold shadow-lg shadow-red-500/25 transition-all cursor-pointer shrink-0"
             title="Watch mouse pointers span selector boxes to craft the site"
           >
             <Sparkles size={13} className="animate-spin" style={{ animationDuration: "3s" }} />
             <span className="hidden sm:inline">✨ Rebuild Canvas</span>
             <span className="sm:hidden">Canvas</span>
-          </button>
+          </MagneticButton>
 
           {/* Lo-Fi Ambient Synthesizer & Equalizer */}
           <button
@@ -147,8 +171,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             {soundEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
           </button>
 
-          {/* Launch OS Desktop Button */}
-          <button
+          {/* Launch OS Desktop Button with Magnetic Hover */}
+          <MagneticButton
             onClick={() => {
               soundFX.playWindowOpen();
               onSwitchToOS();
@@ -158,7 +182,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Monitor size={14} className="group-hover:rotate-12 transition-transform text-teal-400" />
             <span className="hidden sm:inline">Launch OS Desktop</span>
             <span className="sm:hidden">OS Mode</span>
-          </button>
+          </MagneticButton>
 
           {/* Mobile Menu Hamburger Toggle */}
           <button
@@ -173,6 +197,19 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         </div>
       </div>
+
+      {/* Floating Recruiter Share Toast Notification */}
+      {shareToast && (
+        <div className="fixed top-20 right-6 z-50 flex items-center gap-2.5 bg-[#0d1222] border border-purple-400/50 text-white px-4 py-3 rounded-xl shadow-2xl shadow-purple-500/20 text-xs font-mono animate-fadeIn">
+          <div className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center text-emerald-400">
+            <Check size={12} />
+          </div>
+          <div>
+            <div className="font-bold text-purple-300">Candidate Profile Copied!</div>
+            <div className="text-[10px] text-slate-400">Ready to paste into Slack, LinkedIn or WhatsApp</div>
+          </div>
+        </div>
+      )}
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
